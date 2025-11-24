@@ -18,8 +18,40 @@ def open_login_signup():
     # tabs for login and signup
     tabview = CTkTabview(window_login, fg_color="#474A48", segmented_button_fg_color="#537A5A", segmented_button_selected_color="#9AE19D", segmented_button_unselected_color="#537A5A")
     tabview.pack(pady=20, padx=20, fill="both", expand=True)
-    tabview.add("Login")
-    tabview.add("Signup")
+    login_tab = tabview.add("Login")
+    signup_tab = tabview.add("Signup")
+    # Top level window for login/signup
+
+    #login
+    # username: label then entry Password: label then entry then button
+
+    username_login_label = CTkLabel(login_tab, text="Username:", font=CTkFont(size=20), text_color="#FFFFFF")
+    username_login_label.pack(pady=10)
+    username_login_entry = CTkEntry(login_tab, width=300, font=CTkFont(size=20))
+    username_login_entry.pack(pady=10)
+    password_login_label = CTkLabel(login_tab, text="Password:", font=CTkFont(size=20), text_color="#FFFFFF")
+    password_login_label.pack(pady=10)
+    password_login_entry = CTkEntry(login_tab, width=300, font=CTkFont(size=20))
+    password_login_entry.pack(pady=10)
+    login_button = CTkButton(login_tab, text="Log in", font=CTkFont(size=20), fg_color="#9AE19D")
+    login_button.pack(pady=20)
+    
+    # signup
+    # username: label then entry Password: label then entry then button
+    
+    username_signup_label = CTkLabel(signup_tab, text="Username:", font=CTkFont(size=20), text_color="#FFFFFF")
+    username_signup_label.pack(pady=10)
+    username_signup_entry = CTkEntry(signup_tab, width=300, font=CTkFont(size=20))
+    username_signup_entry.pack(pady=10)
+    password_signup_label = CTkLabel(signup_tab, text="Password:", font=CTkFont(size=20), text_color="#FFFFFF")
+    password_signup_label.pack(pady=10)
+    password_signup_entry = CTkEntry(signup_tab, width=300, font=CTkFont(size=20))
+    password_signup_entry.pack(pady=10)
+    signup_button = CTkButton(signup_tab, text="Sign up", font=CTkFont(size=20), fg_color="#9AE19D")
+    signup_button.pack(pady=20)
+    
+    
+    
 
 #create the main window
 app = CTk(fg_color="#909590")
@@ -40,6 +72,7 @@ app_slogan.pack(pady=10)
 # button
 Open_login_window_button = CTkButton(app, text="Log in",font=CTkFont(size=20, weight="bold"),fg_color="#9AE19D", command=open_login_signup)
 Open_login_window_button.pack(pady=90)
+
 
 
 
