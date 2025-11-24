@@ -18,7 +18,7 @@ def login_success():
     main_exit_button.pack(side="top", anchor="ne", padx=10, pady=10)
 
 
-# lof in function
+# login in function
 def login(username, password):
     global attempts_left
     found = False
@@ -39,15 +39,33 @@ def login(username, password):
         return False
 
 
-# signup function to add new username and password to CSV file
 
-def signup(username, password):
-    with open('users.csv', mode='a',newline="") as file: # append mode to add without deleting
-        fieldnames = ['username', 'password']
-        line = f"{username},{password}" + "\n"
-        file.write(line)
-        file.close()
-        messagebox.showinfo("Signup Successful", "You have successfully signed up! You can now log in.")
+
+
+# signup function to add new username and password to CSV file
+# OMG THE Validating that the username doesnt already exist took me forever. Thats me done for today
+# honestly that csv stuff was hell If you are reading this. i dont know what i have done but it works. 
+def signup(username,password):
+    copy = True
+    with open("users.csv", mode="r") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            if row["username"] != username:
+                copy = False
+                file.close()
+                with open('users.csv', mode='a',newline="") as file: # append mode to add without deleting
+                    fieldnames = ['username', 'password']
+                    line = f"{username},{password}" + "\n"
+                    file.write(line)
+                    file.close()
+                    messagebox.showinfo("Signup Successful", "You have successfully signed up! You can now log in.")
+                return True
+    #if matching is found
+    if copy == True:
+        print("copy")
+        messagebox.showerror("Username already exists!", "The username you have enter is already being used. Try another one!")
+        return False
+
 
 
 
