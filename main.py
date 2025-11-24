@@ -1,4 +1,5 @@
 from customtkinter import *
+import csv
 
 
 
@@ -24,7 +25,7 @@ def open_login_signup():
 
     #login
     # username: label then entry Password: label then entry then button
-
+    # these haveto be placed in the function with the definition otherwise they wont show up
     username_login_label = CTkLabel(login_tab, text="Username:", font=CTkFont(size=20), text_color="#FFFFFF")
     username_login_label.pack(pady=10)
     username_login_entry = CTkEntry(login_tab, width=300, font=CTkFont(size=20))
@@ -50,7 +51,9 @@ def open_login_signup():
     signup_button = CTkButton(signup_tab, text="Sign up", font=CTkFont(size=20), fg_color="#9AE19D")
     signup_button.pack(pady=20)
     
-    
+#function to exit kill welcome window and app
+def exit_app():
+    app.destroy()    
     
 
 #create the main window
@@ -58,8 +61,13 @@ app = CTk(fg_color="#909590")
 app.geometry("1920x1080")
 app.title("Trail Talk")
 app.resizable(False, False)
+app.attributes ("-fullscreen", True)
+app.update()
 
 # main window Title
+# exit button top right
+exit_button = CTkButton(app, text="X", font=CTkFont(size=20, weight="bold"), fg_color="#FF5C5C", command=app.destroy)
+exit_button.pack(side="top", anchor="ne", padx=10, pady=10)
 
 # title
 app_Title = CTkLabel(app, text="Trail Talk", font=CTkFont(size=250, weight="bold"), text_color="#537A5A")
