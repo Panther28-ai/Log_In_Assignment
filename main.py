@@ -18,28 +18,36 @@ def login_success():
     main_exit_button.pack(side="top", anchor="ne", padx=10, pady=10)
 
 
-
-# log in function to check username and password against CSV file
+# lof in function
 def login(username, password):
-    global attempts_left # to modify the global variable
-    with open('users.csv', mode='r') as file:
-        reader = csv.DictReader(file)
-        for row in reader: # seach through each row
-            if row['username'] == username and row['password'] == password: # if both are equal it will work
-                login_success() # open main window 
-                exit_app() # kils the log in welcom window
-                return True # if this isnt here then messagebox will still show idk why 
-            else:     
-                attempts_left = attempts_left - 1 # needs to before the if statement or closes at -1
-                messagebox.showerror("Login Failed", f"Invalid username or password. You have {attempts_left} attempts left.")
-                if attempts_left <= 0:
-                    app.destroy()  # close the app if no attempts left
-                return False 
+    global attempts_left
+    found = False
+    with open('users.csv', mode='r') as file: # read only mod so 
+        reader = csv.DictReader(file) #dictunary read
+        for row in reader: # looop for amount of rows
+            if row['username'] == username and row['password'] == password:
+                found = True
+                login_success()
+                exit_app()
+                return True
+    # If no match found after checking all rows
+    if not found:
+        attempts_left -= 1
+        messagebox.showerror("Login Failed", f"Invalid username or password. You have {attempts_left} attempts left.")
+        if attempts_left <= 0:
+            app.destroy()
+        return False
+
 
 # signup function to add new username and password to CSV file
 
 def signup(username, password):
-    with open('users.csv', mode='a', newline='') as file: # append mode to add without deleting
+    with open('users.csv', mode='a',newline="") as file: # append mode to add without deleting
+        fieldnames = ['username', 'password']
+        line = f"{username},{password}" + "\n"
+        file.write(line)
+        file.close()
+        messagebox.showinfo("Signup Successful", "You have successfully signed up! You can now log in.")
 
 
 
