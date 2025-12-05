@@ -8,14 +8,25 @@ attempts_left = 3
 def login_success():
     # create window after login main screen
     main = CTk(fg_color="#909590")
-    main.geometry("1920x1080")
+    #main.geometry("1920x1080")
+    custom_width_main = main.winfo_screenwidth()
+    custom_height_main = main.winfo_screenheight()
+    #app.geometry(f"{custom_width}x{custom_height}")
+    main.geometry(str(custom_width_main)+"x"+str(custom_height_main))
+    main.state("zoomed")
     main.title("Trail Talk")
     main.resizable(False, False)
-    main.attributes ("-fullscreen", True)
+    #main.attributes ("-fullscreen", True)
     main.update()
 
+
+    # exit button top right
     main_exit_button = CTkButton(main, text="X", font=CTkFont(size=20, weight="bold"), fg_color="#FF5C5C", command=main.destroy)
     main_exit_button.pack(side="top", anchor="ne", padx=10, pady=10)
+
+    # welcome label
+    welcome_label = CTkLabel(main, text="Welcome to Trail Talk!", font=CTkFont(size=50, weight="bold"), text_color="#FFFFFF")
+    welcome_label.pack(pady=50)
 
 
 # login in function
@@ -127,10 +138,15 @@ def exit_app():
 
 #create the login window
 app = CTk(fg_color="#909590")
-app.geometry("1920x1080")
+#app.geometry("1920x1080")
+custom_width = app.winfo_screenwidth()
+custom_height = app.winfo_screenheight()
+#app.geometry(f"{custom_width}x{custom_height}")
+app.geometry(str(custom_width)+"x"+str(custom_height))
+app.state("zoomed")
 app.title("Trail Talk | Login required")
 app.resizable(False, False)
-app.attributes ("-fullscreen", True)
+#app.attributes ("-fullscreen", True)
 app.update()
 
 # login window Title
